@@ -1,0 +1,23 @@
+{
+  "name": "6_reservando",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Van-Oost/Reservando.git"
+  },
+  "author": "nico.vanoost@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Van-Oost/Reservando/issues"
+  },
+  "homepage": "https://github.com/Van-Oost/Reservando#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
+  }
+}
