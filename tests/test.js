@@ -91,7 +91,6 @@ describe("Probando la función calificar(nuevaCalificacion)", function(){
     var calificacionesAnteriores;
     beforeEach(function() {
         restaurant = new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlín", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9]);
-        arrayAnterior =  [...restaurant.horarios];
         calificacionesAnteriores = [...restaurant.calificaciones]   
     }); 
 
@@ -132,33 +131,110 @@ describe("Probando la función calificar(nuevaCalificacion)", function(){
 
 describe("Probando la función buscarRestaurante(id)", function(){
 
+    var busqueda;
     var restaurant;
     beforeEach(function() {
         restaurant = new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlín", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9]);
-        arrayAnterior =  [...restaurant.horarios];   
-    }); 
+        busqueda = listado.buscarRestaurante.bind(listado)
+    });
 
-    it("Prueba 1", function(){
+
+    it("Al ingresar un ID retorna ese mismo ID de la Lista", function(){
         
-        restaurant.calificaciones = [1,2,3,4,5];
-        expect( restaurant.obtenerPuntuacion() ).to.eql( 588 );
+        expect( busqueda(3) ).to.eql( restaurant );
 
     });
 
+    it("Al ingresar un ID retorna: No se ha encontrado ningún restaurant", function(){
+        
+        expect( busqueda() ).to.eql( "No se ha encontrado ningún restaurant" );
+
+    });
+
+
+    it("Al ingresar un ID inexistente retorna: No se ha encontrado ningún restaurant", function(){
+        
+        expect( busqueda(859) ).to.eql( "No se ha encontrado ningún restaurant" );
+
+    });
+
+    
+    it("Al ingresar un ID inexistente retorna: No se ha encontrado ningún restaurant", function(){
+        
+        expect( busqueda(859) ).to.eql( "No se ha encontrado ningún restaurant" );
+
+    });
+
+    it("Al ingresar una palabra como ID retorna: No se ha encontrado ningún restaurant", function(){
+        
+        expect( busqueda("ornitorrinco") ).to.eql( "No se ha encontrado ningún restaurant" );
+
+    });
+
+  
+
 });
 
-describe("Probando la obtenerRestaurantes()", function(){
+describe("Probando la obtenerRestaurantes(filtroRubro, filtroCiudad, filtroHorario)", function(){
 
-    var restaurant;
+    var resultadoFiltrado;
     beforeEach(function() {
-        restaurant = new Restaurant(3, "Burgermeister", "Hamburguesa", "Berlín", ["11:30", "12:00", "22:30"], "../img/hamburguesa4.jpg", [5, 8, 4, 9, 9]);
-        arrayAnterior =  [...restaurant.horarios];   
+           
     }); 
 
-    it("Prueba 1", function(){
+    it("Ingresando los parametros correctos retornael restaurante correcto", function(){
         
-        restaurant.calificaciones = [1,2,3,4,5];
-        expect( restaurant.obtenerPuntuacion() ).to.eql( 588 );
+        resultadoFiltrado = [new Restaurant(8, "Cafe Francoeur", "Desayuno", "París", ["14:30", "15:30", "19:00"], "../img/desayuno1.jpg", [4, 7, 9, 8, 10])];
+        
+        expect( listado.obtenerRestaurantes("Desayuno", "París", "14:30") ).to.eql( resultadoFiltrado );
+
+    });
+
+    it("Ingresando los parametros correctos retorna la lista correcta de multiples restaurantes", function(){
+        
+        resultadoFiltrado = [
+            new Restaurant(8, "Cafe Francoeur", "Desayuno", "París", ["14:30", "15:30", "19:00"], "../img/desayuno1.jpg", [4, 7, 9, 8, 10]),
+            new Restaurant(19, "Les Deux Magots", "Desayuno", "París", ["17:00", "19:00", "22:30"], "../img/desayuno4.jpg", [8, 4, 6, 6, 7])
+        ];
+
+        expect( listado.obtenerRestaurantes("Desayuno", "París", "19:00") ).to.eql( resultadoFiltrado );
+
+    });
+
+    it("Ingresando un horario incorrecto no retorna nada", function(){
+        
+        expect( listado.obtenerRestaurantes("Desayuno", "París", "00:00") ).to.eql( [] );
+
+    });
+    
+    it("Ingresando una ciudad incorrecta no retorna nada", function(){
+        
+        expect( listado.obtenerRestaurantes("Desayuno", "Ornitorrinco", "19:00") ).to.eql( [] );
+
+    });
+
+    
+    it("Ingresando un rubro incorrecto no retorna nada", function(){
+        
+        expect( listado.obtenerRestaurantes("Mandril", "París", "19:00") ).to.eql( [] );
+
+    });
+
+    it("Ingresando un horario vacio no retorna nada", function(){
+        
+        expect( listado.obtenerRestaurantes("Desayuno", "París", "") ).to.eql( [] );
+
+    });
+
+    it("Ingresando un rubro vacio no retorna nada", function(){
+        
+        expect( listado.obtenerRestaurantes("", "París", "19:00") ).to.eql( [] );
+
+    });
+
+    it("Ingresando una ciudad vacia no retorna nada", function(){
+        
+        expect( listado.obtenerRestaurantes("Desayuno", "", "19:00") ).to.eql( [] );
 
     });
 
