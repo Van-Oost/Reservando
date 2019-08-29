@@ -145,7 +145,7 @@ describe("Probando la función buscarRestaurante(id)", function(){
 
     });
 
-    it("Al ingresar un ID retorna: No se ha encontrado ningún restaurant", function(){
+    it("Al ingresar un ID vacio retorna: No se ha encontrado ningún restaurant", function(){
         
         expect( busqueda() ).to.eql( "No se ha encontrado ningún restaurant" );
 
@@ -158,12 +158,6 @@ describe("Probando la función buscarRestaurante(id)", function(){
 
     });
 
-    
-    it("Al ingresar un ID inexistente retorna: No se ha encontrado ningún restaurant", function(){
-        
-        expect( busqueda(859) ).to.eql( "No se ha encontrado ningún restaurant" );
-
-    });
 
     it("Al ingresar una palabra como ID retorna: No se ha encontrado ningún restaurant", function(){
         

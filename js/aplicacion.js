@@ -144,7 +144,7 @@ Aplicacion.prototype.dibujarCiudades = function() {
     this.cargarOpcionDefault("filtro-ciudad", "Ciudad");
     this.cargarOpcionTodos("filtro-ciudad");
 
-    this.listado.obtC().forEach(function(ciudad) {
+    this.listado.obtenerCiudad().forEach(function(ciudad) {
         var nuevaOpcion = $("<option/>").text(ciudad).val(ciudad);
         nuevaOpcion.appendTo("#filtro-ciudad");
     });
@@ -156,7 +156,7 @@ Aplicacion.prototype.dibujarRubros = function() {
     this.cargarOpcionDefault("filtro-rubro", "Rubro");
     this.cargarOpcionTodos("filtro-rubro")
 
-    this.listado.obtR().forEach(function(rubro) {
+    this.listado.obtenerRubro().forEach(function(rubro) {
         var nuevaOpcion = $("<option/>").text(rubro).val(rubro);
         nuevaOpcion.appendTo("#filtro-rubro");
     });
@@ -169,7 +169,7 @@ Aplicacion.prototype.dibujarHorarios = function() {
     this.cargarOpcionDefault("filtro-horario", "Horario");
     this.cargarOpcionTodos("filtro-horario")
 
-    this.listado.obtH().forEach(function(horario) {
+    this.listado.obtenerHorario().forEach(function(horario) {
         var nuevaOpcion = $("<option/>").text(horario).val(horario);
         nuevaOpcion.appendTo("#filtro-horario");
     });
