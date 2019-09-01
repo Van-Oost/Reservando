@@ -172,9 +172,6 @@ describe("Probando la función buscarRestaurante(id)", function(){
 describe("Probando la obtenerRestaurantes(filtroRubro, filtroCiudad, filtroHorario)", function(){
 
     var resultadoFiltrado;
-    beforeEach(function() {
-           
-    }); 
 
     it("Ingresando los parametros correctos retornael restaurante correcto", function(){
         
@@ -229,6 +226,46 @@ describe("Probando la obtenerRestaurantes(filtroRubro, filtroCiudad, filtroHorar
     it("Ingresando una ciudad vacia no retorna nada", function(){
         
         expect( listado.obtenerRestaurantes("Desayuno", "", "19:00") ).to.eql( [] );
+
+    });
+
+});
+
+describe("Probando la Reserva", function(){
+
+    var reserva1;
+    var reserva2;
+    
+    beforeEach(function() {
+        reserva1 = new Reserva(new Date(2018, 7, 24, 11, 00), 8, 350, "DES1");
+        reserva2 = new Reserva(new Date(2018, 7, 27, 14, 100), 2, 150, "DES200");
+    });
+    
+
+    it("Comprueba que un restaurante calcule correctamente su precio base.", function(){
+        
+        expect( reserva1.precioBase() ).to.eql( 2800 );
+
+    });
+
+
+    it("Comprueba que un restaurante calcule correctamente su precio base.", function(){
+        
+        expect( reserva2.precioBase() ).to.eql( 300 );
+
+    });
+
+
+    it("Comprueba que un restaurante calcule correctamente su precio final, contemplando bien los descuentos y los adicionales.", function(){
+        
+        expect( reserva1.precioFinal() ).to.eql( 2310 );
+
+    });
+
+
+    it("Comprueba que un restaurante calcule correctamente su precio final, contemplando bien los descuentos y los adicionales.", function(){
+        
+        expect( reserva2.precioFinal() ).to.eql( 100 );
 
     });
 
