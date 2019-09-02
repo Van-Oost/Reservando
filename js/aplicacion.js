@@ -1,3 +1,5 @@
+
+
 var Aplicacion = function(listado) {
         this.listado = listado;
         this.dibujarListado(listado.restaurantes)

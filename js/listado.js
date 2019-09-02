@@ -26,29 +26,35 @@ return this.restaurantes.find( restaurante => restaurante.id === id) || "No se h
 //Obtiene todas las ciudades de los restaurantes sin repetidos
 Listado.prototype.obtenerCiudad = function() {
     
-    var ciudades = this.restaurantes.ubicacion.map();
+    var ciudades = this.restaurantes.map(restaurant => restaurant.ubicacion);
     return limpiarRepetidos(ciudades).sort();
-}
+};
 
 //Obtiene todos los rubros de los restaurantes sin repetidos. Su funcionamiento es similar a obtenerCiudad()
 Listado.prototype.obtenerRubro = function() {
     
-    var rubros = this.restaurantes.rubro.map();
+    var rubros = this.restaurantes.map(restaurant => restaurant.rubro);
     return limpiarRepetidos(rubros).sort();
-}
+};
 
 
 Listado.prototype.obtenerHorario = function() {
     
-    var horariosTodos = this.restaurantes.rubro.map();
-    return limpiarRepetidos(horariosTodos).sort();
-}
+    var horariosTodos = this.restaurantes.map(restaurant => restaurant.horarios);
+    var horariosPlanos = [].concat(...horariosTodos);
+    return limpiarRepetidos(horariosPlanos).sort();
+};
+
 
 function limpiarRepetidos(arregloSinLimpiar){
-        arregloSinLimpiar.filter(function(elem, index, self) {
-        return index === self.indexOf(elem);
-    });
-}
+        var arreglolimpio = arregloSinLimpiar.reduce(function (accumulator, currentValue) {
+            if (accumulator.indexOf(currentValue) === -1) {
+              accumulator.push(currentValue);
+            }
+            return accumulator
+          }, []);
+        return arreglolimpio;
+};
 
 
 //Función que recibe los filtros que llegan desde el HTML y filtra el arreglo de restaurantes.
