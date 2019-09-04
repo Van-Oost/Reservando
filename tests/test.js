@@ -312,7 +312,7 @@ describe("Probando la Reserva", function(){
 
     it("Comprueba que un restaurante calcule correctamente su precio final, contemplando bien los descuentos y los adicionales.", function(){
         
-        expect( reserva1.precioFinal() ).to.eql( 2310 );
+        expect( reserva1.precioFinal() ).to.eql( 2450 );
 
     });
 
