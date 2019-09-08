@@ -94,7 +94,7 @@ describe("Probando la función calificar(nuevaCalificacion)", function(){
         calificacionesAnteriores = [...restaurant.calificaciones]   
     }); 
 
-    it("La nueva calificacion se agrega exitosamente a la lista de calificaciones", function(){
+    it("La nueva calificacion (8) se agrega exitosamente a la lista de calificaciones", function(){
         
         restaurant.calificar(8)
         var ultimaCalificacion = restaurant.calificaciones.pop()
@@ -103,21 +103,21 @@ describe("Probando la función calificar(nuevaCalificacion)", function(){
     });
 
 
-    it("Si no se califica con ningun valor, no se agrega nada a la lista", function(){
+    it("Si no se califica con ningun valor (0), no se agrega nada a la lista", function(){
         
         restaurant.calificar(0)
         expect( restaurant.calificaciones.length).to.eql( calificacionesAnteriores.length );
 
     });
 
-    it("Si se califica con una palabra, no se agrega nada a la lista", function(){
+    it("Si se califica con una palabra (perro), no se agrega nada a la lista", function(){
         
         restaurant.calificar("perro")
         expect( restaurant.calificaciones.length).to.eql( calificacionesAnteriores.length );
 
     });
 
-    it("Si se califica con un numero negativo, no se agrega nada a la lista", function(){
+    it("Si se califica con un numero negativo (-9), no se agrega nada a la lista", function(){
         
         restaurant.calificar(-9)
         expect( restaurant.calificaciones.length).to.eql( calificacionesAnteriores.length );
@@ -227,7 +227,7 @@ describe("Probando la obtenerRestaurantes(filtroRubro, filtroCiudad, filtroHorar
     ];
     var listadoDePrueba = new Listado(restaurantes);
 
-    it("Ingresando los parametros correctos retorna el restaurante correcto", function(){
+    it("Ingresando los parametros correctos (Desayuno, París, 14:30) retorna el restaurante correcto", function(){
         
         resultadoFiltrado = [new Restaurant(8, "Cafe Francoeur", "Desayuno", "París", ["14:30", "15:30", "19:00"], "../img/desayuno1.jpg", [4, 7, 9, 8, 10])];
         
@@ -235,7 +235,7 @@ describe("Probando la obtenerRestaurantes(filtroRubro, filtroCiudad, filtroHorar
 
     });
 
-    it("Ingresando los parametros correctos retorna la lista correcta de multiples restaurantes", function(){
+    it("Ingresando los parametros correctos (Desayuno, París, 14:30) retorna la lista correcta de multiples restaurantes", function(){
         
         resultadoFiltrado = [
             new Restaurant(8, "Cafe Francoeur", "Desayuno", "París", ["14:30", "15:30", "19:00"], "../img/desayuno1.jpg", [4, 7, 9, 8, 10]),
@@ -246,20 +246,20 @@ describe("Probando la obtenerRestaurantes(filtroRubro, filtroCiudad, filtroHorar
 
     });
 
-    it("Ingresando un horario incorrecto no retorna nada", function(){
+    it("Ingresando un horario incorrecto (00:00) no retorna nada", function(){
         
         expect( listadoDePrueba.obtenerRestaurantes("Desayuno", "París", "00:00") ).to.eql( [] );
 
     });
     
-    it("Ingresando una ciudad incorrecta no retorna nada", function(){
+    it("Ingresando una ciudad incorrecta (Ornitorrinco) no retorna nada", function(){
         
         expect( listadoDePrueba.obtenerRestaurantes("Desayuno", "Ornitorrinco", "19:00") ).to.eql( [] );
 
     });
 
     
-    it("Ingresando un rubro incorrecto no retorna nada", function(){
+    it("Ingresando un rubro incorrecto (Mandril) no retorna nada", function(){
         
         expect( listadoDePrueba.obtenerRestaurantes("Mandril", "París", "19:00") ).to.eql( [] );
 
@@ -296,28 +296,28 @@ describe("Probando la Reserva", function(){
     });
     
 
-    it("Comprueba que un restaurante calcule correctamente su precio base.", function(){
+    it("Comprueba que un restaurante (Reserva(new Date(2018, 7, 24, 11, 00), 8, 350, DES1) calcule correctamente su precio base (2800).", function(){
         
         expect( reserva1.precioBase() ).to.eql( 2800 );
 
     });
 
 
-    it("Comprueba que un restaurante calcule correctamente su precio base.", function(){
+    it("Comprueba que un restaurante (Reserva(new Date(2018, 7, 27, 14, 100), 2, 150, DES200)) calcule correctamente su precio base (300).", function(){
         
         expect( reserva2.precioBase() ).to.eql( 300 );
 
     });
 
 
-    it("Comprueba que un restaurante calcule correctamente su precio final, contemplando bien los descuentos y los adicionales.", function(){
+    it("Comprueba que un restaurante (Reserva(new Date(2018, 7, 24, 11, 00), 8, 350, DES1) calcule correctamente su precio final (2450), contemplando bien los descuentos y los adicionales.", function(){
         
         expect( reserva1.precioFinal() ).to.eql( 2450 );
 
     });
 
 
-    it("Comprueba que un restaurante calcule correctamente su precio final, contemplando bien los descuentos y los adicionales.", function(){
+    it("Comprueba que un restaurante (Reserva(new Date(2018, 7, 27, 14, 100), 2, 150, DES200)) calcule correctamente su precio final (100), contemplando bien los descuentos y los adicionales.", function(){
         
         expect( reserva2.precioFinal() ).to.eql( 100 );
 
